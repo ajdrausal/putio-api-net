@@ -1,0 +1,46 @@
+// <copyright>
+//   Copyright (c) 2010 Huseyin Tufekcilerli. All rights reserved.
+//   
+//   Licensed under the Apache License, Version 2.0 (the "License");
+//   you may not use this file except in compliance with the License.
+//   You may obtain a copy of the License at
+//   
+//       http://www.apache.org/licenses/LICENSE-2.0
+//   
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS,
+//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//   See the License for the specific language governing permissions and
+//   limitations under the License.
+// </copyright>
+// <author>Huseyin Tufekcilerli</author>
+
+namespace Putio.Core
+{
+    internal struct Method
+    {
+        private readonly string path;
+        private readonly string name;
+
+        public Method(string path, string name)
+        {
+            this.path = path;
+            this.name = name;
+        }
+
+        public string Path
+        {
+            get { return this.path; }
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+        }
+
+        public string GetUrl()
+        {
+            return this.Path + "?method=" + this.Name;
+        }
+    }
+}

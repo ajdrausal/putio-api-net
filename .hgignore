@@ -1,0 +1,9 @@
+# use glob syntax
+syntax: glob
+
+*.user
+*.suo
+*.[Cc]ache
+[Bb]in
+[Dd]ebug*/
+obj/
