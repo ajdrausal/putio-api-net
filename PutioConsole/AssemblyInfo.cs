@@ -14,8 +14,8 @@ using System.Runtime.InteropServices;
 [assembly: Guid("afb2d076-9a9c-47ea-b149-ec038af1e629")]
 
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
+[assembly: AssemblyInformationalVersion("0.1.0.0")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
