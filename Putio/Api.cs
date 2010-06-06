@@ -52,17 +52,10 @@ namespace Putio
 
         public string GetAccessToken()
         {
-            var requestString = this.SendRequest(Methods.GetUserToken, null);
-            var tokenObject = JObject.Parse(requestString);
+            var responseString = this.SendRequest(Methods.GetUserToken, null);
+            var tokenObject = JObject.Parse(responseString);
 
-            var error = tokenObject["error"].Value<bool>();
-
-            if (error)
-            {
-                var errorMessage = tokenObject["error_message"].Value<string>();
-
-                throw new PutioException(errorMessage, Methods.GetUserToken.GetUrl(), null);
-            }
+            this.CheckResponseErrorAndThrow(tokenObject, Methods.GetUserToken, null);
 
             return tokenObject["response"]["results"]["token"].Value<string>();
         }
@@ -145,6 +138,32 @@ namespace Putio
             return this.GetFirstResultOrDefault<Item>(Methods.CreateDirectory, parameters);
         }
 
+        /// <summary>
+        /// Deletes an item.
+        /// </summary>
+        /// <param name="id">The id of item to be deleted.</param>
+        /// <exception cref="PutioException">Invalid item id specified.</exception>
+        public void DeleteItem(string id)
+        {
+            var parameters = new Dictionary<string, object> { { "id", id } };
+            var responseString = this.SendRequest(Methods.DeleteFile, parameters);
+            var response = JObject.Parse(responseString);
+
+            this.CheckResponseErrorAndThrow(response, Methods.DeleteFile, parameters);
+        }
+
+        private void CheckResponseErrorAndThrow(JObject response, Method method, Dictionary<string, object> parameters)
+        {
+            var hasError = response["error"].Value<bool>();
+
+            if (hasError)
+            {
+                var errorMessage = response["error_message"].Value<string>();
+
+                throw new PutioException(errorMessage, method.GetUrl(), parameters);
+            }
+        }
+
         private Item[] GetItemsCore(IDictionary<string, object> parameters)
         {
             return this.GetResults<Item>(Methods.ListFiles, parameters);
@@ -159,9 +178,9 @@ namespace Putio
 
         private T[] GetResults<T>(Method method, IDictionary<string, object> parameters)
         {
-            var requestString = this.SendRequest(method, parameters);
+            var responseString = this.SendRequest(method, parameters);
 
-            var response = JsonConvert.DeserializeObject<Response<T>>(requestString);
+            var response = JsonConvert.DeserializeObject<Response<T>>(responseString);
 
             if (response.Error)
             {

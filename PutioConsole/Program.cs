@@ -13,7 +13,7 @@
 
             // Initialize API
             var api = new Api(key, secret);
-
+            
             // User methods (for currently authenticated user)
             var user = api.GetUserInfo();
             var friends = api.GetFriends();
@@ -36,6 +36,9 @@
             // Directory methods
             var dir = api.CreateDirectory("Foo");
             var subDir = api.CreateDirectory("Bar", dir.Id);
+            
+            // Delete item
+            api.DeleteItem(subDir.Id);
 
             // Transfer methods
             var transfers = api.GetTransfers();
