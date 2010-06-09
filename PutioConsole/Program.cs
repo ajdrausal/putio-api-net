@@ -37,6 +37,9 @@
             var dir = api.CreateDirectory("Foo");
             var subDir = api.CreateDirectory("Bar", dir.Id);
 
+            // Folder list (recursive)
+            var folderList = api.GetFolderList();
+
             //Get Item info
             var itemInfo = api.GetItemInfo("6035693");
 

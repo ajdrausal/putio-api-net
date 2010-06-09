@@ -47,17 +47,12 @@ namespace Putio
 
         public Friend[] GetFriends()
         {
-            return this.GetResults<Friend>(Methods.GetUserFriends, null);
+            return this.GetResultsArray<Friend>(Methods.GetUserFriends, null);
         }
 
         public string GetAccessToken()
         {
-            var responseString = this.SendRequest(Methods.GetUserToken, null);
-            var tokenObject = JObject.Parse(responseString);
-
-            this.CheckResponseErrorAndThrow(tokenObject, Methods.GetUserToken, null);
-
-            return tokenObject["response"]["results"]["token"].Value<string>();
+            return this.GetResultsObject<TokenResult>(Methods.GetUserToken, null).Token;
         }
 
         public Item[] GetRootItems()
@@ -99,17 +94,17 @@ namespace Putio
 
         public Transfer[] GetTransfers()
         {
-            return this.GetResults<Transfer>(Methods.ListTransfers, null);
+            return this.GetResultsArray<Transfer>(Methods.ListTransfers, null);
         }
 
         public Subscription[] GetSubscriptions()
         {
-            return this.GetResults<Subscription>(Methods.ListSubscriptions, null);
+            return this.GetResultsArray<Subscription>(Methods.ListSubscriptions, null);
         }
 
         public Message[] GetMessages()
         {
-            return this.GetResults<Message>(Methods.ListMessages, null);
+            return this.GetResultsArray<Message>(Methods.ListMessages, null);
         }
 
         public Item CreateDirectory(string name)
@@ -213,7 +208,16 @@ namespace Putio
                 { "query", query },
             };
 
-            return this.GetResults<Item>(Methods.SearchFiles, parameters);
+            return this.GetResultsArray<Item>(Methods.SearchFiles, parameters);
+        }
+
+        /// <summary>
+        /// Gets hierchical list of folders.
+        /// </summary>
+        /// <returns>Root folder with its sub directories listed recursively</returns>
+        public Folder GetFolderList()
+        {
+            return this.GetResultsObject<Folder>(Methods.MapDirectories, null);
         }
 
         private void CheckResponseErrorAndThrow(JObject response, Method method, Dictionary<string, object> parameters)
@@ -230,17 +234,27 @@ namespace Putio
 
         private Item[] GetItemsCore(IDictionary<string, object> parameters)
         {
-            return this.GetResults<Item>(Methods.ListFiles, parameters);
+            return this.GetResultsArray<Item>(Methods.ListFiles, parameters);
         }
 
         private T GetFirstResultOrDefault<T>(Method method, IDictionary<string, object> parameters)
         {
-            var results = this.GetResults<T>(method, parameters);
+            var results = this.GetResultsArray<T>(method, parameters);
 
             return results.Length > 0 ? results[0] : default(T);
         }
 
-        private T[] GetResults<T>(Method method, IDictionary<string, object> parameters)
+        private T[] GetResultsArray<T>(Method method, IDictionary<string, object> parameters)
+        {
+            return this.GetResultsCore<ArrayResponseContents<T>>(method, parameters).Results;
+        }
+
+        private T GetResultsObject<T>(Method method, IDictionary<string, object> parameters)
+        {
+            return this.GetResultsCore<ObjectResponseContents<T>>(method, parameters).Results;
+        }
+
+        private T GetResultsCore<T>(Method method, IDictionary<string, object> parameters)
         {
             var responseString = this.SendRequest(method, parameters);
 
@@ -251,7 +265,7 @@ namespace Putio
                 throw new PutioException(response.ErrorMessage, method.GetUrl(), parameters);
             }
 
-            return response.Contents.Results;
+            return response.Contents;
         }
 
         private string SendRequest(Method method, IDictionary<string, object> parameters)

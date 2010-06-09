@@ -1,4 +1,4 @@
-// <copyright>
+﻿// <copyright>
 //   Copyright (c) 2010 Huseyin Tufekcilerli. All rights reserved.
 //   
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,21 +17,8 @@
 
 namespace Putio.Core
 {
-    using Newtonsoft.Json;
-
-    internal class Response<T>
+    internal class ObjectResponseContents<T> : ResponseContents<T>
     {
-        [JsonProperty(PropertyName = "response")]
-        public T Contents { get; set; }
-
-        public bool Error { get; set; }
-
-        [JsonProperty(PropertyName = "error_message")]
-        public string ErrorMessage { get; set; }
-
-        [JsonProperty(PropertyName = "user_name")]
-        public string UserName { get; set; }
-
-        public int? Id { get; set; }
+        public T Results { get; set; }
     }
 }

@@ -38,6 +38,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api.cs" />
+    <Compile Include="Core\ArrayResponseContents.cs" />
+    <Compile Include="Core\ObjectResponseContents.cs" />
+    <Compile Include="Core\TokenResult.cs" />
+    <Compile Include="Folder.cs" />
     <Compile Include="Friend.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Json\StringLongConverter.cs" />

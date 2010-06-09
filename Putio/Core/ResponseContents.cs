@@ -20,7 +20,5 @@ namespace Putio.Core
     internal class ResponseContents<T>
     {
         public int Total { get; set; }
-
-        public T[] Results { get; set; }
     }
 }

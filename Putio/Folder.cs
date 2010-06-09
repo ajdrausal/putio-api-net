@@ -1,4 +1,4 @@
-// <copyright>
+﻿// <copyright>
 //   Copyright (c) 2010 Huseyin Tufekcilerli. All rights reserved.
 //   
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +15,25 @@
 // </copyright>
 // <author>Huseyin Tufekcilerli</author>
 
-namespace Putio.Core
+namespace Putio
 {
     using Newtonsoft.Json;
 
-    internal class Response<T>
+    public class Folder
     {
-        [JsonProperty(PropertyName = "response")]
-        public T Contents { get; set; }
+        public string Id { get; set; }
 
-        public bool Error { get; set; }
+        public string Name { get; set; }
 
-        [JsonProperty(PropertyName = "error_message")]
-        public string ErrorMessage { get; set; }
+        [JsonProperty(PropertyName = "parent_id")]
+        public string ParentId { get; set; }
 
-        [JsonProperty(PropertyName = "user_name")]
-        public string UserName { get; set; }
+        public string Shared { get; set; }
 
-        public int? Id { get; set; }
+        [JsonProperty(PropertyName = "default_shared")]
+        public string DefaultShared { get; set; }
+
+        [JsonProperty(PropertyName = "dirs")]
+        public Folder[] SubDirectories { get; set; }
     }
 }
