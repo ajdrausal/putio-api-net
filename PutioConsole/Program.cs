@@ -37,7 +37,10 @@
             var dir = api.CreateDirectory("Foo");
             var subDir = api.CreateDirectory("Bar", dir.Id);
 
-            // Delete item
+            //Get Item info
+            var itemInfo = api.GetItemInfo("6035693");
+
+            // Delete Item
             api.DeleteItem(subDir.Id);
 
             // Rename Item

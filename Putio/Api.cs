@@ -60,16 +60,6 @@ namespace Putio
             return tokenObject["response"]["results"]["token"].Value<string>();
         }
 
-        public Item GetItemById(string id)
-        {
-            var parameters = new Dictionary<string, object>
-            { 
-                { "id", id },
-            };
-
-            return GetFirstResultOrDefault<Item>(Methods.ListFiles, parameters);
-        }
-
         public Item[] GetRootItems()
         {
             return this.GetItems("0");
@@ -186,6 +176,22 @@ namespace Putio
             };
 
             return GetFirstResultOrDefault<Item>(Methods.MoveFile, parameters);
+        }
+
+        /// <summary>
+        /// Returns a single item with given id.
+        /// </summary>
+        /// <param name="id">The id of the item to be retrieved.</param>
+        /// <returns>Requested item, if succeeds.</returns>
+        /// <exception cref="PutioException">Invalid item id specified.</exception>
+        public Item GetItemInfo(string id)
+        {
+            var parameters = new Dictionary<string, object>
+            { 
+                { "id", id },
+            };
+
+            return GetFirstResultOrDefault<Item>(Methods.GetFileInfo, parameters);
         }
 
         private void CheckResponseErrorAndThrow(JObject response, Method method, Dictionary<string, object> parameters)

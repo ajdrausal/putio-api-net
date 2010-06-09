@@ -26,7 +26,7 @@ namespace Putio.Core
         private static readonly Method renameFile;
         private static readonly Method moveFile;
         private static readonly Method deleteFile;
-        ////private static readonly Method getFileInfo;
+        private static readonly Method getFileInfo;
 
         private static readonly Method listMessages;
         ////private static readonly Method deleteMessage;
@@ -59,7 +59,7 @@ namespace Putio.Core
             renameFile = new Method(Paths.Files, "rename");
             moveFile = new Method(Paths.Files, "move");
             deleteFile = new Method(Paths.Files, "delete");
-            ////getFileInfo = new Method(Paths.Files, "info");
+            getFileInfo = new Method(Paths.Files, "info");
 
             // Dashboard Messages:
             listMessages = new Method(Paths.Messages, "list");
@@ -123,10 +123,10 @@ namespace Putio.Core
             get { return deleteFile; }
         }
 
-        ////public static Method GetFileInfo
-        ////{
-        ////    get { return getFileInfo; }
-        ////}
+        public static Method GetFileInfo
+        {
+            get { return getFileInfo; }
+        }
 
         public static Method ListMessages
         {
