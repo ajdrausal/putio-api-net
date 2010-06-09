@@ -152,6 +152,24 @@ namespace Putio
             this.CheckResponseErrorAndThrow(response, Methods.DeleteFile, parameters);
         }
 
+        /// <summary>
+        /// Rename an existing item.
+        /// </summary>
+        /// <param name="id">The id of item to be renamed.</param>
+        /// <param name="name">The new name of the item</param>
+        /// <returns>Renamed item, if succeeds.</returns>
+        /// <exception cref="PutioException">Invalid item id specified.</exception>
+        public Item RenameItem(string id, string name)
+        {
+            var parameters = new Dictionary<string, object>
+            { 
+                { "id", id },
+                { "name", name },
+            };
+
+            return GetFirstResultOrDefault<Item>(Methods.RenameFile, parameters);
+        }
+
         private void CheckResponseErrorAndThrow(JObject response, Method method, Dictionary<string, object> parameters)
         {
             var hasError = response["error"].Value<bool>();

@@ -13,7 +13,7 @@
 
             // Initialize API
             var api = new Api(key, secret);
-            
+            api.RenameItem("603565", "New Name " + DateTime.Now.Ticks);
             // User methods (for currently authenticated user)
             var user = api.GetUserInfo();
             var friends = api.GetFriends();
@@ -36,9 +36,12 @@
             // Directory methods
             var dir = api.CreateDirectory("Foo");
             var subDir = api.CreateDirectory("Bar", dir.Id);
-            
+
             // Delete item
             api.DeleteItem(subDir.Id);
+
+            // Rename Item
+            var renamedItem = api.RenameItem("6035650", "New Name " + DateTime.Now.Ticks);
 
             // Transfer methods
             var transfers = api.GetTransfers();
