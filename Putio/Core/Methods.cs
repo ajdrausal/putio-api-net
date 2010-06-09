@@ -21,7 +21,7 @@ namespace Putio.Core
     {
         private static readonly Method listFiles;
         private static readonly Method createDirectory;
-        ////private static readonly Method searchFiles;
+        private static readonly Method searchFiles;
         ////private static readonly Method mapDirectories;
         private static readonly Method renameFile;
         private static readonly Method moveFile;
@@ -54,7 +54,7 @@ namespace Putio.Core
             // Files:
             listFiles = new Method(Paths.Files, "list");
             createDirectory = new Method(Paths.Files, "create_dir");
-            ////searchFiles = new Method(Paths.Files, "search");
+            searchFiles = new Method(Paths.Files, "search");
             ////mapDirectories = new Method(Paths.Files, "dirmap");
             renameFile = new Method(Paths.Files, "rename");
             moveFile = new Method(Paths.Files, "move");
@@ -98,10 +98,10 @@ namespace Putio.Core
             get { return createDirectory; }
         }
 
-        ////public static Method SearchFiles
-        ////{
-        ////    get { return searchFiles; }
-        ////}
+        public static Method SearchFiles
+        {
+            get { return searchFiles; }
+        }
 
         ////public static Method MapDirectories
         ////{

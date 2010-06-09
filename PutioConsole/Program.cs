@@ -23,7 +23,7 @@
             var itemsRoot = api.GetRootItems();
             var itemsPartial = api.GetItems(10, 20, "15");
             var itemsChild = api.GetItems("108");
-            var itemSingle = api.GetItemById("23");
+
             try
             {
                 var itemsException = api.GetItems("42");
@@ -48,6 +48,9 @@
 
             // Move Item
             var movedItem = api.MoveItem("6035693", "6035650");
+
+            // Search Items
+            var searchResults = api.SearchItems("'bunny' from:'me' type:'video'");
 
             // Transfer methods
             var transfers = api.GetTransfers();

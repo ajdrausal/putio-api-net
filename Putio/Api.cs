@@ -194,6 +194,28 @@ namespace Putio
             return GetFirstResultOrDefault<Item>(Methods.GetFileInfo, parameters);
         }
 
+        /// <summary>
+        /// Searches items in your storage.
+        /// </summary>
+        /// <param name="query">A Put.io search query string.</param>
+        /// <returns>Items matching the specified query.</returns>
+        /// <remarks>
+        /// You may add search parameters to the string such as:
+        ///     "from:'me'"      (from:shares|jack|all|etc.)
+        ///     "type:'video'"   (audio|image|iphone|all|etc.)
+        ///     "ext:'mp3'"      (avi|jpg|mp4|all|etc.)
+        ///     "time:'today'"   (yesterday|thismonth|thisweek|all|etc.)
+        /// </remarks>
+        public Item[] SearchItems(string query)
+        {
+            var parameters = new Dictionary<string, object>
+            { 
+                { "query", query },
+            };
+
+            return this.GetResults<Item>(Methods.SearchFiles, parameters);
+        }
+
         private void CheckResponseErrorAndThrow(JObject response, Method method, Dictionary<string, object> parameters)
         {
             var hasError = response["error"].Value<bool>();
