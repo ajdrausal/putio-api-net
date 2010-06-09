@@ -13,7 +13,7 @@
 
             // Initialize API
             var api = new Api(key, secret);
-            api.RenameItem("603565", "New Name " + DateTime.Now.Ticks);
+
             // User methods (for currently authenticated user)
             var user = api.GetUserInfo();
             var friends = api.GetFriends();
@@ -42,6 +42,9 @@
 
             // Rename Item
             var renamedItem = api.RenameItem("6035650", "New Name " + DateTime.Now.Ticks);
+
+            // Move Item
+            var movedItem = api.MoveItem("6035693", "6035650");
 
             // Transfer methods
             var transfers = api.GetTransfers();

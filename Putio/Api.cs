@@ -170,6 +170,24 @@ namespace Putio
             return GetFirstResultOrDefault<Item>(Methods.RenameFile, parameters);
         }
 
+        /// <summary>
+        /// Move an existing item.
+        /// </summary>
+        /// <param name="id">The id of item to be moved.</param>
+        /// <param name="targetParentId">Target parent folder id the item to be moved, "0" for root folder.</param>
+        /// <returns>Moved item, if succeeds.</returns>
+        /// <exception cref="PutioException">Invalid item/parent id specified.</exception>
+        public Item MoveItem(string id, string targetParentId)
+        {
+            var parameters = new Dictionary<string, object>
+            { 
+                { "id", id },
+                { "parent_id", targetParentId },
+            };
+
+            return GetFirstResultOrDefault<Item>(Methods.MoveFile, parameters);
+        }
+
         private void CheckResponseErrorAndThrow(JObject response, Method method, Dictionary<string, object> parameters)
         {
             var hasError = response["error"].Value<bool>();
