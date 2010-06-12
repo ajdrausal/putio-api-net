@@ -29,7 +29,7 @@ namespace Putio.Core
         private static readonly Method getFileInfo;
 
         private static readonly Method listMessages;
-        ////private static readonly Method deleteMessage;
+        private static readonly Method deleteMessage;
 
         private static readonly Method listSubscriptions;
         ////private static readonly Method createSubscription;
@@ -63,7 +63,7 @@ namespace Putio.Core
 
             // Dashboard Messages:
             listMessages = new Method(Paths.Messages, "list");
-            ////deleteMessage = new Method(Paths.Messages, "delete");
+            deleteMessage = new Method(Paths.Messages, "delete");
 
             // Subscriptions:
             listSubscriptions = new Method(Paths.Subscriptions, "list");
@@ -133,10 +133,10 @@ namespace Putio.Core
             get { return listMessages; }
         }
 
-        ////public static Method DeleteMessage
-        ////{
-        ////    get { return deleteMessage; }
-        ////}
+        public static Method DeleteMessage
+        {
+            get { return deleteMessage; }
+        }
 
         public static Method ListSubscriptions
         {

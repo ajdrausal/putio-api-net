@@ -102,9 +102,27 @@ namespace Putio
             return this.GetResultsArray<Subscription>(Methods.ListSubscriptions, null);
         }
 
+        /// <summary>
+        /// Gets dashboard messages.
+        /// </summary>
+        /// <returns>Dashboard messages of authenticated user</returns>
         public Message[] GetMessages()
         {
             return this.GetResultsArray<Message>(Methods.ListMessages, null);
+        }
+
+        /// <summary>
+        /// Deletes dashboard message with specified id.
+        /// </summary>
+        /// <param name="id">Id of message to be deleted.</param>
+        public void DeleteMessage(string id)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "id", id },
+            };
+
+            this.GetResultsArray<object>(Methods.DeleteMessage, parameters);
         }
 
         public Item CreateDirectory(string name)

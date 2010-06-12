@@ -63,6 +63,7 @@
 
             // Message methods
             var messages = api.GetMessages();
+            api.DeleteMessage("5313536");
         }
     }
 }
