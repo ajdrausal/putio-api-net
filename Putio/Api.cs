@@ -145,6 +145,20 @@ namespace Putio
         }
 
         /// <summary>
+        /// Deletes subscription with specified id.
+        /// </summary>
+        /// <param name="id">Id of subscription to be deleted.</param>
+        public void DeleteSubscription(string id)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "id", id },
+            };
+
+            this.GetResultsArray<object>(Methods.DeleteSubscription, parameters);
+        }
+
+        /// <summary>
         /// Gets dashboard messages.
         /// </summary>
         /// <returns>Dashboard messages of authenticated user</returns>

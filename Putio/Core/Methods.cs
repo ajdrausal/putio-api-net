@@ -34,7 +34,7 @@ namespace Putio.Core
         private static readonly Method listSubscriptions;
         private static readonly Method createSubscription;
         private static readonly Method editSubscription;
-        ////private static readonly Method deleteSubscription;
+        private static readonly Method deleteSubscription;
         ////private static readonly Method pauseSubscription;
         ////private static readonly Method getSubscriptionInfo;
 
@@ -69,7 +69,7 @@ namespace Putio.Core
             listSubscriptions = new Method(Paths.Subscriptions, "list");
             createSubscription = new Method(Paths.Subscriptions, "create");
             editSubscription = new Method(Paths.Subscriptions, "edit");
-            ////deleteSubscription = new Method(Paths.Subscriptions, "delete");
+            deleteSubscription = new Method(Paths.Subscriptions, "delete");
             ////pauseSubscription = new Method(Paths.Subscriptions, "pause");
             ////getSubscriptionInfo = new Method(Paths.Subscriptions, "info");
 
@@ -153,10 +153,10 @@ namespace Putio.Core
             get { return editSubscription; }
         }
 
-        ////public static Method DeleteSubscription
-        ////{
-        ////    get { return deleteSubscription; }
-        ////}
+        public static Method DeleteSubscription
+        {
+            get { return deleteSubscription; }
+        }
 
         ////public static Method PauseSubscription
         ////{
