@@ -26,10 +26,13 @@ namespace Putio.Json
     {
         public static string IndetJsonString(string input)
         {
-            var r = new JsonTextReader(new StringReader(input));
-            var raw = JRaw.ReadFrom(r);
+            using (var stringReader = new StringReader(input))
+            {
+                var r = new JsonTextReader(stringReader);
+                var raw = JRaw.ReadFrom(r);
 
-            return raw.ToString();
+                return raw.ToString();
+            }
         }
     }
 }

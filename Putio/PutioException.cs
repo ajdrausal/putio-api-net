@@ -19,7 +19,10 @@ namespace Putio
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
+    [Serializable]
     public class PutioException : Exception
     {
         private readonly string methodUrl;
@@ -41,6 +44,15 @@ namespace Putio
         public IDictionary<string, object> Parameters
         {
             get { return this.parameters; }
+        }
+
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            info.AddValue("MethodUrl", this.methodUrl, typeof(string));
+            info.AddValue("Parameters", this.parameters, typeof(IDictionary<string, object>));
         }
     }
 }
