@@ -179,6 +179,21 @@ namespace Putio
         }
 
         /// <summary>
+        /// Gets a single subscription with specified id.
+        /// </summary>
+        /// <param name="id">Id of subscription.</param>
+        /// <returns><see cref="Subscription"/> object, if exists.</returns>
+        public Subscription GetSubscription(string id)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "id", id },
+            };
+
+            return GetFirstResultOrDefault<Subscription>(Methods.GetSubscriptionInfo, parameters);
+        }
+
+        /// <summary>
         /// Gets dashboard messages.
         /// </summary>
         /// <returns>Dashboard messages of authenticated user</returns>

@@ -64,6 +64,7 @@
             var editedSubscription = api.EditSubscription("2513", "My subscription pimped", "http://www.legaltorrents.com/rss.xml");
             api.DeleteSubscription("424242");
             var toggledSubscription = api.ToggleSubscriptionStatus("2671");
+            var subscription = api.GetSubscription("2671");
 
             // Message methods
             var messages = api.GetMessages();
