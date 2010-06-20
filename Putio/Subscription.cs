@@ -24,20 +24,8 @@ namespace Putio
     [DebuggerDisplay("{Name}")]
     public class Subscription
     {
-        /*
-        "last_update_time": "2010-06-05 19:01:27",
-        "parent_folder_id": "6036577",
-        "name": "dnrTV",
-        "next_update_time": "2010-06-05 20:01:27",
-        "url": "http://feeds.feedburner.com/DnrtvTorrent",
-        "paused": false,
-        "do_filters": "",
-        "dont_filters": "",
-        "id": "2513"
-        */
-
         [JsonProperty(PropertyName = "last_update_time")]
-        public DateTime LastUpdateTime { get; set; }
+        public DateTime? LastUpdateTime { get; set; }
 
         [JsonProperty(PropertyName = "parent_folder_id")]
         public string ParentFolderId { get; set; }
@@ -45,7 +33,7 @@ namespace Putio
         public string Name { get; set; }
 
         [JsonProperty(PropertyName = "next_update_time")]
-        public DateTime NextUpdateTime { get; set; }
+        public DateTime? NextUpdateTime { get; set; }
 
         public string Url { get; set; }
 

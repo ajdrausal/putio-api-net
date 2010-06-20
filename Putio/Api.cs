@@ -97,9 +97,30 @@ namespace Putio
             return this.GetResultsArray<Transfer>(Methods.ListTransfers, null);
         }
 
+        /// <summary>
+        /// Gets subscriptions.
+        /// </summary>
+        /// <returns>Subscriptions of authenticated user</returns>
         public Subscription[] GetSubscriptions()
         {
             return this.GetResultsArray<Subscription>(Methods.ListSubscriptions, null);
+        }
+
+        /// <summary>
+        /// Creates a new subscription.
+        /// </summary>
+        /// <param name="title">Title for the new subscription</param>
+        /// <param name="url">Url address to subscribe</param>
+        /// <returns>New subscription, if succeeds.</returns>
+        public Subscription CreateSubscription(string title, string url)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "title", title ?? "New Subscription" },
+                { "url", url },
+            };
+
+            return this.GetFirstResultOrDefault<Subscription>(Methods.CreateSubscription, parameters);
         }
 
         /// <summary>
