@@ -159,6 +159,26 @@ namespace Putio
         }
 
         /// <summary>
+        /// Toggles subscription status, that is pauses if not and vice versa.
+        /// </summary>
+        /// <remarks>
+        /// You may also change this value by editing the subscription item. 
+        /// This is just a shortcut we use.
+        /// </remarks>
+        /// <param name="id">Id of subscription to be paused/continued.</param>
+        /// <returns>Toggled subscription, if succeeds.</returns>
+        /// <exception cref="PutioException">Wrong subscription id specified.</exception>
+        public Subscription ToggleSubscriptionStatus(string id)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "id", id },
+            };
+
+            return this.GetFirstResultOrDefault<Subscription>(Methods.PauseSubscription, parameters);
+        }
+
+        /// <summary>
         /// Gets dashboard messages.
         /// </summary>
         /// <returns>Dashboard messages of authenticated user</returns>
