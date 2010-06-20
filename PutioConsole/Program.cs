@@ -61,6 +61,7 @@
             // Subscription methods
             var subscriptions = api.GetSubscriptions();
             var newSubscription = api.CreateSubscription("My LegalTorrents Subscription", "http://www.legaltorrents.com/rss.xml");
+            var editedSubscription = api.EditSubscription("2513", "My subscription pimped", "http://www.legaltorrents.com/rss.xml");
 
             // Message methods
             var messages = api.GetMessages();

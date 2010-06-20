@@ -21,7 +21,7 @@ namespace Putio
     using System.Diagnostics;
     using Newtonsoft.Json;
 
-    [DebuggerDisplay("{Name}")]
+    [DebuggerDisplay("{Name} - {Url}")]
     public class Subscription
     {
         [JsonProperty(PropertyName = "last_update_time")]

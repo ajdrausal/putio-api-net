@@ -124,6 +124,27 @@ namespace Putio
         }
 
         /// <summary>
+        /// Changes values of any given subscription attribute.
+        /// </summary>
+        /// <param name="id">Id of an existing subscription to be edited</param>
+        /// <param name="newTitle">New title for the subscription</param>
+        /// <param name="newUrl">New url address for the subscription</param>
+        /// <returns>Edited subscription, if succeeds.</returns>
+        /// <exception cref="PutioException">If <paramref name="id"/> is wrong</exception>
+        /// <exception cref="PutioException">If <paramref name="newTitle"/> or <paramref name="newUrl"/> is null</exception>
+        public Subscription EditSubscription(string id, string newTitle, string newUrl)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "id", id },
+                { "title", newTitle },
+                { "url", newUrl },
+            };
+
+            return this.GetFirstResultOrDefault<Subscription>(Methods.EditSubscription, parameters);
+        }
+
+        /// <summary>
         /// Gets dashboard messages.
         /// </summary>
         /// <returns>Dashboard messages of authenticated user</returns>
